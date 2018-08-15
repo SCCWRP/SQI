@@ -1,0 +1,29 @@
+Package: WQI
+Type: Package
+Title: Calculate water quality index scores from stream data
+Version: 1.0.0.9000
+Date: 2018-08-15
+Author: Marcus W. Beck [aut, cre],
+  Raphael D. Mazor [ctb]
+Maintainer: Marcus W. Beck <marcusb@sccwrp.org>
+Description: Tools for calculating water quality index (WQI)
+  scores from stream data.  Requires biological and chemical
+  data.
+BugReports: http://github.com/SCCWRP/WQI/issues
+License: CC0
+Imports:
+    dplyr,
+    randomForest
+LazyData: true
+Depends:
+    R (>= 3.4.0)
+Authors@R: c(
+  person(given = "Marcus W.", family = "Beck",
+    role = c("aut","cre"),
+    email = "marcusb@sccwrp.org"),
+  person(given = "Raphael D.", family = "Mazor", 
+    role = c("ctb"),
+    email = "raphaelm@sccwrp.org")
+    )
+Encoding: UTF-8
+RoxygenNote: 6.1.0

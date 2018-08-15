@@ -1,0 +1,26 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: no
+  pdf_document:
+    toc: yes
+---
+
+#### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrplorg*
+
+# Overview 
+
+This package provides functions to calculate a water quality index using stream data.  The index requires biological and chemical data.
+
+# Installing the package
+
+The development version of this package can be installed from Github:
+
+```{r eval = F, message = F}
+install.packages('devtools')
+library(devtools)
+install_github('SCCWRP/WQI')
+library(WQI)
+```
