@@ -8,7 +8,7 @@ output:
     toc: yes
 ---
 
-#### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrplorg*
+#### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org*
 
 [![Travis-CI Build Status](https://travis-ci.org/SCCWRP/WQI.svg?branch=master)](https://travis-ci.org/SCCWRP/WQI)
  [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/WQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/WQI)
