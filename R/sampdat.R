@@ -7,8 +7,8 @@
 #' \describe{
 #'   \item{\code{MasterID}}{chr} site id
 #'   \item{\code{date}}{date} sample date
-#'   \item{\code{csci_mean}}{chr} CSCI score, 0 to ~ 1.4
-#'   \item{\code{h20_mean}}{chr} algal index score, 0 to 100
+#'   \item{\code{CSCI}}{chr} CSCI score, 0 to ~ 1.4
+#'   \item{\code{ASCI}}{chr} ASCI score, 0 to 100
 #'   \item{\code{PCT_SAFN}}{num} percent sands and fines
 #'   \item{\code{H_AqHab}}{num} Shannon diversity of aquatic habitat, 0 to ~ 2.5
 #'   \item{\code{H_SubNat}}{num} Shannon diversity of streambed substrate, 0 to ~ 2.5

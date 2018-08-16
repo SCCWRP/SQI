@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>README.utf8</title>
+
+<script src="README_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="README_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="README_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="README_files/navigation-1.1/tabsets.js"></script>
+<link href="README_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="README_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="marcus-w.-beck-marcusbsccwrp.org-raphael-d.-mazor-raphaelmsccwrplorg" class="section level4">
+<h4><em>Marcus W. Beck, <a href="mailto:marcusb@sccwrp.org">marcusb@sccwrp.org</a>, Raphael D. Mazor, <a href="mailto:raphaelm@sccwrplorg">raphaelm@sccwrplorg</a></em></h4>
+<p><a href="https://travis-ci.org/SCCWRP/WQI"><img src="https://travis-ci.org/SCCWRP/WQI.svg?branch=master" alt="Travis-CI Build Status" /></a> <a href="https://ci.appveyor.com/project/SCCWRP/WQI"><img src="https://ci.appveyor.com/api/projects/status/github/SCCWRP/WQI?branch=master&amp;svg=true" alt="AppVeyor Build Status" /></a></p>
+</div>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>This package provides functions to calculate a water quality index using stream data. The index requires biological and chemical data.</p>
+</div>
+<div id="installing-the-package" class="section level1">
+<h1>Installing the package</h1>
+<p>The development version of this package can be installed from Github:</p>
+<pre class="r"><code>install.packages(&#39;devtools&#39;)
+library(devtools)
+install_github(&#39;SCCWRP/WQI&#39;)
+library(WQI)</code></pre>
+</div>
+<div id="usage" class="section level1">
+<h1>Usage</h1>
+<p>The core function is <code>wqi()</code>:</p>
+<pre class="r"><code>wqi(sampdat)</code></pre>
+<pre><code>##    MasterID       date      CSCI ASCI PCT_SAFN H_AqHab H_SubNat Ev_FlowHab
+## 1 911KCKCRx 2011-05-31 1.0828769   76       67    1.62     1.44       0.66
+## 2 911S12262 2010-05-24 0.9524888   40       60    0.86     1.37       0.45
+## 3  SMC04806 2013-07-11 0.7758977   40        7    1.08     1.33       0.99
+## 4  SMC05109 2009-06-23 0.8124133   38       98    1.43     0.15       0.00
+## 5    911LAP 2014-04-09 1.0469197   80       67    1.06     1.10       0.40
+##   XCMG indexscore_cram Cond   TN2     TP pChem  pHab pChemHab
+## 1  122              93  600 0.175 0.0345 0.707 0.425 0.300475
+## 2   93              84  808 0.705 0.2690 0.001 0.159 0.000159
+## 3  179              57 2437 0.258 0.0520 0.036 0.064 0.002304
+## 4   87              73  196 1.300 0.3740 0.046 0.031 0.001426
+## 5  139              71  871 0.128 0.0280 0.843 0.648 0.546264
+##          BiologicalCondition WaterChemistryCondition HabitatCondition
+## 1                    Healthy                     Low           Severe
+## 2         Impacted for algae                  Severe           Severe
+## 3 Impacted for BMI and algae                  Severe           Severe
+## 4         Impacted for algae                  Severe           Severe
+## 5                    Healthy                     Low           Severe
+##   OverallStressCondition                 OverallStressCondition_detail
+## 1                 Severe               Stressed by habitat degradation
+## 2                 Severe Stressed by chemistry and habitat degradation
+## 3                 Severe Stressed by chemistry and habitat degradation
+## 4                 Severe Stressed by chemistry and habitat degradation
+## 5               Moderate               Stressed by habitat degradation
+##       StreamHealthIndex
+## 1 Healthy and resilient
+## 2 Impacted and stressed
+## 3 Impacted and stressed
+## 4 Impacted and stressed
+## 5 Healthy and resilient</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

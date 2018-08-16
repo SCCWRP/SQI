@@ -4,21 +4,27 @@
 #' 
 #' @param datin input \code{data.frame} with chemical and biological data
 #' 
+#' @details 
+#' See \code{\link{sampdat}} for required input format
+#' 
 #' @export
 #'
-#' @return a data frame
+#' @return a \code{data.frame} same as \code{datin} but with new columns for \code{pChem}, \code{pHab}, \code{pChemHab}, \code{BiologicalCondtion}, \code{WaterChemistryCondition}, \code{HabitatCondition}, \code{OverallStressCondition}, and \code{StreamHealthIndex}
 #' 
-#' @importFrom magrittr "%>%"
+#' @importFrom dplyr "%>%"
+#' @import randomForest
 #' 
+#' @examples
+#' wqi(sampdat)
 wqi <- function(datin){
-  browser()
+
   # probability of low stress, chem, hab, and overall
   datin$pChem<-predict(wqrfwp, newdata=datin, type="prob")[,2]
   datin$pHab<-predict(habrfwp, newdata=datin, type="prob")[,2]
   datin$pChemHab<-datin$pChem*datin$pHab
   
   out <- datin %>%
-    mutate(
+    dplyr::mutate(
       BiologicalCondition = ifelse(CSCI>=0.79 & ASCI>=60,"Healthy",
                                    ifelse(CSCI<0.79 & ASCI<60,"Impacted for BMI and algae",
                                           ifelse(CSCI<0.79 & ASCI>=60,"Impacted for BMI",
