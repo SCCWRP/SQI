@@ -1,8 +1,8 @@
 Package: WQI
 Type: Package
 Title: Calculate Water Quality Index Scores From Stream Data
-Version: 1.0.0
-Date: 2018-08-15
+Version: 1.0.1
+Date: 2018-08-19
 Author: Marcus W. Beck [aut, cre],
   Raphael D. Mazor [ctb]
 Maintainer: Marcus W. Beck <marcusb@sccwrp.org>
