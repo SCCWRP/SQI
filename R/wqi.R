@@ -25,9 +25,9 @@ wqi <- function(datin){
   datin$pChemHab<- datin$pChem*datin$pHab
   
   # converse is estimated to get probability of stress
-  datin$pChem <- 1 - pChem
-  datin$pHab <- 1 - pHab
-  datin$pChemHab <-  1 - pChemHab
+  datin$pChem <- 1 - datin$pChem
+  datin$pHab <- 1 - datin$pHab
+  datin$pChemHab <-  1 - datin$pChemHab
   
   out <- datin %>%
     dplyr::mutate(
