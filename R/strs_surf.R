@@ -197,6 +197,7 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
   if(title){
     
     titlvl <- cnt_vrs %>% 
+      mutate(val = round(val, 1)) %>% 
       unite('con', var, val, sep = ' ') %>% 
       unlist %>% 
       paste(collapse = ', ') %>% 
@@ -207,6 +208,7 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
       
       selcvl <- opt_vrs %>% 
         filter(var %in% c(xvar, yvar)) %>% 
+        mutate(val = round(val, 1)) %>% 
         unite('con', var, val, sep = ' ') %>% 
         dplyr::select(-rng) %>% 
         unlist %>% 

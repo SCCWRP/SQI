@@ -5,8 +5,8 @@
 \title{Plot probability surface for likelihood of stress}
 \usage{
 strs_surf(xvar, yvar, mod = c("hab_mod", "wq_mod"), title = TRUE,
-  lenv = 200, opt_vrs = NULL, low = "#d7191c", mid = "#ffffbf",
-  high = "#2c7bb6")
+  lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf",
+  high = "#d7191c")
 }
 \arguments{
 \item{xvar}{chr string of variable for x-axis}
