@@ -48,11 +48,11 @@
 #'  )
 #'  
 #' strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', opt_vrs = opt_vrs)
-strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, lenv = 200, opt_vrs = NULL, low = "#d7191c", mid = "#ffffbf", high = "#2c7bb6"){
-  
+strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf", high = "#d7191c"){
+
   # get mod arg
   mod <- match.arg(mod)
-  
+
   # hab and wq vars
   hab_vrs <- c('indexscore_cram', 'PCT_SAFN', 'H_AqHab', 'H_SubNat', 'Ev_FlowHab', 'XCMG')
   wq_vrs <- c('TN2', 'TP', 'Cond')
@@ -171,6 +171,7 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
   # rsp <- paste0('predict(', modin, ', newdata = prd_vrs, type = "response")')
   rsp <- paste0('predict(', mod_in, ', newdata = prd_vrs, type = "prob")[,2]')
   rsp <- eval(parse(text = rsp))
+  rsp <- 1 - rsp
   
   # combined predictation data and response
   toplo <- prd_vrs %>% 
