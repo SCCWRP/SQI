@@ -11,7 +11,8 @@
 #'
 #' @return a \code{data.frame} same as \code{datin} but with new columns for \code{pChem}, \code{pHab}, \code{pChemHab}, \code{BiologicalCondtion}, \code{WaterChemistryCondition}, \code{HabitatCondition}, \code{OverallStressCondition}, and \code{StreamHealthIndex}
 #' 
-#' @importFrom dplyr "%>%"
+#' @importFrom magrittr "%>%"
+#' 
 #' @import randomForest
 #' 
 #' @examples

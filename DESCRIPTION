@@ -2,7 +2,7 @@ Package: WQI
 Type: Package
 Title: Calculate Water Quality Index Scores From Stream Data
 Version: 1.0.1
-Date: 2018-08-19
+Date: 2018-08-29
 Author: Marcus W. Beck [aut, cre],
   Raphael D. Mazor [ctb]
 Maintainer: Marcus W. Beck <marcusb@sccwrp.org>
@@ -13,7 +13,12 @@ BugReports: http://github.com/SCCWRP/WQI/issues
 License: CC0
 Imports:
     dplyr,
-    randomForest
+    ggplot2,
+    magrittr,
+    purrr,
+    randomForest,
+    tibble,
+    tidyr
 LazyData: true
 Depends:
     R (>= 3.4.0)
