@@ -56,7 +56,7 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
   # hab and wq vars
   hab_vrs <- c('indexscore_cram', 'PCT_SAFN', 'H_AqHab', 'H_SubNat', 'Ev_FlowHab', 'XCMG')
   wq_vrs <- c('TN2', 'TP', 'Cond')
-  
+ 
   # rng and avgs for habitat/wq variables
   # averages from calibration data, all stations/dates
   rng_vrs <- tibble::tibble( 

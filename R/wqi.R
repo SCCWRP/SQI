@@ -3,9 +3,11 @@
 #' Water quality index function
 #' 
 #' @param datin input \code{data.frame} with chemical and biological data
+#' @param wq_mod_in input model object for predicting stressed state for water quality
+#' @param hab_mod_in input model object for prediction stressed state for habitat
 #' 
 #' @details 
-#' See \code{\link{sampdat}} for required input format
+#' See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[randomForest]{randomForest}} objects (\code{\link{wqrfwp}} and \code{\link{habrfwp}}, default) or \code{\link[mgcv]{gam}} objects (\code{\link{wqgamwp}} and \code{\link{habgamwp}}) included with the package. 
 #' 
 #' @export
 #'
@@ -13,16 +15,40 @@
 #' 
 #' @importFrom magrittr "%>%"
 #' 
-#' @import randomForest
+#' @import mgcv randomForest
 #' 
 #' @examples
+#' 
+#' # using random forest models (default)
 #' wqi(sampdat)
-wqi <- function(datin){
+#' 
+#' # using GAMs
+#' wqi(sampdat, wq_mod_in = wqgamwp, hab_mod_in = habgamwp)
+wqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
 
+  # rf models as default
+  if(is.null(wq_mod_in))
+    wq_mod_in <- wqrfwp
+  if(is.null(hab_mod_in))
+    hab_mod_in <- habrfwp
+  
+  ##
   # probability of stress, chem, hab, and overall
   # model predicts probably of low stress
-  datin$pChem<- predict(wqrfwp, newdata=datin, type="prob")[,2]
-  datin$pHab<- predict(habrfwp, newdata=datin, type="prob")[,2]
+  
+  # gam predictions
+  if(inherits(wq_mod_in, 'gam'))
+    datin$pChem <- predict(wq_mod_in, newdata = datin, type = "response")
+  if(inherits(hab_mod_in, 'gam'))
+    datin$pHab <- predict(hab_mod_in, newdata = datin, type = "response")
+  
+  # randomforest predictions
+  if(inherits(wq_mod_in, 'randomForest'))
+    datin$pChem <- predict(wq_mod_in, newdata = datin, type = "prob")[,2]
+  if(inherits(hab_mod_in, 'randomForest'))
+    datin$pHab <- predict(hab_mod_in, newdata = datin, type = "prob")[,2]
+  
+  # combo stress estimate
   datin$pChemHab<- datin$pChem*datin$pHab
   
   # converse is estimated to get probability of stress
