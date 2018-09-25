@@ -5,6 +5,7 @@
 #' @param xvar chr string of variable for x-axis
 #' @param yvar chr string of variable for y-axix
 #' @param mod chr string of habitat or water quality model to use, must be either \code{'hab_mod'} or \code{'wq_mod'}
+#' @param mod_in chr string of model to use (random forest, default, or GAM), appropriate for \code{mod}
 #' @param title logical indicating if title is shown above plot
 #' @param lenv numeric indicating resolution of probability surface
 #' @param opt_vrs names list with optional constant values for variables not specified by \code{xvar} and \code{yvar}
@@ -12,9 +13,11 @@
 #' @param mid chr string for color at mid range of palette
 #' @param high chr string for color at high end of palette
 #' 
+#' @details 
+#' 
 #' @details Plots a smooth surface of the likelihood of either habitat or water quality stress for selected ranges of two variables.  The remaining variables are held constant at average values for those in the calibration dataset unless manually set with user input.
 #' 
-#' @import randomForest
+#' @import mgcv randomForest
 #' 
 #' @importFrom dplyr filter group_by left_join mutate
 #' @importFrom ggplot2 ggplot aes aes_string scale_fill_gradient2 theme_minimal theme guide_colourbar element_text guides ggtitle geom_point geom_tile scale_y_continuous scale_x_continuous theme_bw
@@ -35,7 +38,11 @@
 #'   Cond = 1139
 #' )
 #' 
+#' # rf model
 #' strs_surf(xvar = 'TN2', yvar = 'TP', mod = 'wq_mod', opt_vrs = opt_vrs)
+#' 
+#' # gam 
+#' strs_surf(xvar = 'TN2', yvar = 'TP', mod = 'wq_mod', mod_in = 'wqgam', opt_vrs = opt_vrs)
 #' 
 #' # habitat stress
 #' opt_vrs <- list(
@@ -47,8 +54,14 @@
 #'    XCMG = 100
 #'  )
 #'  
+#' # rf model  
 #' strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', opt_vrs = opt_vrs)
-strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf", high = "#d7191c"){
+#' 
+#' # gam 
+#' strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', mod_in = 'habgam', 
+#'      opt_vrs = opt_vrs)
+#' 
+strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), mod_in = NULL, title = TRUE, lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf", high = "#d7191c"){
 
   # get mod arg
   mod <- match.arg(mod)
@@ -56,7 +69,7 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
   # hab and wq vars
   hab_vrs <- c('indexscore_cram', 'PCT_SAFN', 'H_AqHab', 'H_SubNat', 'Ev_FlowHab', 'XCMG')
   wq_vrs <- c('TN2', 'TP', 'Cond')
- 
+
   # rng and avgs for habitat/wq variables
   # averages from calibration data, all stations/dates
   rng_vrs <- tibble::tibble( 
@@ -65,12 +78,16 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
     avev = c(69.3, 38, 1.33, 1.3, 0.548, 108, 1.92, 0.232, 1615),
     maxv = c(100, 100, 2.5, 2.5, 1, 264, 1.5, 1, 2000),
     modv = c('hab_mod', 'hab_mod', 'hab_mod', 'hab_mod', 'hab_mod', 'hab_mod', 'wq_mod', 'wq_mod', 'wq_mod')
-  ) %>% 
+    ) %>% 
     gather('rng', 'val', minv, avev, maxv)
   
   ## sanity checks
   # habitat
   if(mod == 'hab_mod'){
+    
+    # use rf mod is not provided
+    if(is.null(mod_in))
+      mod_in <- 'habrf'
     
     # chk xvar and yvar are in hab_vrs
     chk <- any(!c(xvar, yvar) %in% hab_vrs)
@@ -89,6 +106,10 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
     
     # water quality    
   } else {
+    
+    # use rf mod is not provided
+    if(is.null(mod_in))
+      mod_in <- 'wqrf'
     
     # chk xvar and yvar are in wq_vrs
     chk <- any(!c(xvar, yvar) %in% wq_vrs)
@@ -164,12 +185,10 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
     expand.grid
   
   # modelled response surface
-  if(mod == 'hab_mod')
-    mod_in <- 'habrf'
-  else 
-    mod_in <- 'wqrf'
-  # rsp <- paste0('predict(', modin, ', newdata = prd_vrs, type = "response")')
-  rsp <- paste0('predict(', mod_in, ', newdata = prd_vrs, type = "prob")[,2]')
+  if(inherits(get(mod_in), 'randomForest'))
+    rsp <- paste0('predict(', mod_in, ', newdata = prd_vrs, type = "prob")[,2]')
+  if(inherits(get(mod_in), 'gam'))
+    rsp <- paste0('predict(', mod_in, ', newdata = prd_vrs, type = "response")')
   rsp <- eval(parse(text = rsp))
   rsp <- 1 - rsp
   

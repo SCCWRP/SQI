@@ -4,9 +4,9 @@
 \alias{strs_surf}
 \title{Plot probability surface for likelihood of stress}
 \usage{
-strs_surf(xvar, yvar, mod = c("hab_mod", "wq_mod"), title = TRUE,
-  lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf",
-  high = "#d7191c")
+strs_surf(xvar, yvar, mod = c("hab_mod", "wq_mod"), mod_in = NULL,
+  title = TRUE, lenv = 200, opt_vrs = NULL, low = "#2c7bb6",
+  mid = "#ffffbf", high = "#d7191c")
 }
 \arguments{
 \item{xvar}{chr string of variable for x-axis}
@@ -14,6 +14,8 @@ strs_surf(xvar, yvar, mod = c("hab_mod", "wq_mod"), title = TRUE,
 \item{yvar}{chr string of variable for y-axix}
 
 \item{mod}{chr string of habitat or water quality model to use, must be either \code{'hab_mod'} or \code{'wq_mod'}}
+
+\item{mod_in}{chr string of model to use (random forest, default, or GAM), appropriate for \code{mod}}
 
 \item{title}{logical indicating if title is shown above plot}
 
@@ -34,6 +36,8 @@ A \code{\link[ggplot2]{ggplot}} object
 Plot probability surface for likelihood of habitat or water quality stress
 }
 \details{
+
+
 Plots a smooth surface of the likelihood of either habitat or water quality stress for selected ranges of two variables.  The remaining variables are held constant at average values for those in the calibration dataset unless manually set with user input.
 }
 \examples{
@@ -45,7 +49,11 @@ opt_vrs <- list(
   Cond = 1139
 )
 
+# rf model
 strs_surf(xvar = 'TN2', yvar = 'TP', mod = 'wq_mod', opt_vrs = opt_vrs)
+
+# gam 
+strs_surf(xvar = 'TN2', yvar = 'TP', mod = 'wq_mod', mod_in = 'wqgam', opt_vrs = opt_vrs)
 
 # habitat stress
 opt_vrs <- list(
@@ -57,5 +65,10 @@ opt_vrs <- list(
    XCMG = 100
  )
  
+# rf model  
 strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', opt_vrs = opt_vrs)
+
+# gam 
+strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', mod_in = 'habgam', opt_vrs = opt_vrs)
+
 }
