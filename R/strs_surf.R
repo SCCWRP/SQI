@@ -165,9 +165,9 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), title = TRUE, le
   
   # modelled response surface
   if(mod == 'hab_mod')
-    mod_in <- 'habrfwp'
+    mod_in <- 'habrf'
   else 
-    mod_in <- 'wqrfwp'
+    mod_in <- 'wqrf'
   # rsp <- paste0('predict(', modin, ', newdata = prd_vrs, type = "response")')
   rsp <- paste0('predict(', mod_in, ', newdata = prd_vrs, type = "prob")[,2]')
   rsp <- eval(parse(text = rsp))

@@ -20,7 +20,7 @@ a \code{data.frame} same as \code{datin} but with new columns for \code{pChem}, 
 Water quality index function
 }
 \details{
-See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[randomForest]{randomForest}} objects (\code{\link{wqrfwp}} and \code{\link{habrfwp}}, default) or \code{\link[mgcv]{gam}} objects (\code{\link{wqgamwp}} and \code{\link{habgamwp}}) included with the package.
+See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[randomForest]{randomForest}} objects (\code{\link{wqrf}} and \code{\link{habrf}}, default) or \code{\link[mgcv]{gam}} objects (\code{\link{wqgam}} and \code{\link{habgam}}) included with the package.
 }
 \examples{
 
@@ -28,5 +28,5 @@ See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code
 wqi(sampdat)
 
 # using GAMs
-wqi(sampdat, wq_mod_in = wqgamwp, hab_mod_in = habgamwp)
+wqi(sampdat, wq_mod_in = wqgam, hab_mod_in = habgam)
 }

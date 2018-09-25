@@ -6,5 +6,5 @@
 #' @format A \code{\link[randomForest]{randomForest}} model
 #'
 #' @examples 
-#' data(habrfwp)
-"habrfwp"
+#' data(habrf)
+"habrf"

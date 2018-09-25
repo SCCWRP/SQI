@@ -6,5 +6,5 @@
 #' @format A \code{\link[mgcv]{gam}} model
 #'
 #' @examples 
-#' data(wqgamwp)
-"wqgamwp"
+#' data(wqgam)
+"wqgam"
