@@ -1,15 +1,15 @@
-Package: WQI
+Package: SQI
 Type: Package
-Title: Calculate Water Quality Index Scores From Stream Data
-Version: 1.0.2
-Date: 2018-09-25
+Title: Calculate Stream Quality Index Scores From Stream Data
+Version: 1.1.0
+Date: 2018-10-21
 Author: Marcus W. Beck [aut, cre],
   Raphael D. Mazor [ctb]
 Maintainer: Marcus W. Beck <marcusb@sccwrp.org>
-Description: Tools for calculating water quality index (WQI)
-  scores from stream data.  Requires biological and chemical
-  data.
-BugReports: http://github.com/SCCWRP/WQI/issues
+Description: Tools for calculating stream quality index (SQI)
+  scores from stream data.  Requires biological, chemical, and
+  physical data.
+BugReports: http://github.com/SCCWRP/SQI/issues
 License: CC0
 Imports:
     dplyr,

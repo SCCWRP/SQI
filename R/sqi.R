@@ -1,8 +1,8 @@
-#' WQI
+#' SQI
 #'
-#' Water quality index function
+#' Stream quality index function
 #' 
-#' @param datin input \code{data.frame} with chemical and biological data
+#' @param datin input \code{data.frame} with chemical, physical, and biological data
 #' @param wq_mod_in input model object for predicting stressed state for water quality
 #' @param hab_mod_in input model object for prediction stressed state for habitat
 #' 
@@ -20,11 +20,11 @@
 #' @examples
 #' 
 #' # using random forest models (default)
-#' wqi(sampdat)
+#' sqi(sampdat)
 #' 
 #' # using GAMs
-#' wqi(sampdat, wq_mod_in = wqgam, hab_mod_in = habgam)
-wqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
+#' sqi(sampdat, wq_mod_in = wqgam, hab_mod_in = habgam)
+sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
 
   # rf models as default
   if(is.null(wq_mod_in))

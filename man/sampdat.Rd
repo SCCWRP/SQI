@@ -4,7 +4,7 @@
 \name{sampdat}
 \alias{sampdat}
 \title{Sample data}
-\format{A \code{\link{data.frame}} of biological and chemical data, one row per sample
+\format{A \code{\link{data.frame}} of biological, chemical, and physical data, one row per sample
 \describe{
   \item{\code{MasterID}}{chr} site id
   \item{\code{date}}{date} sample date
@@ -24,7 +24,7 @@
 sampdat
 }
 \description{
-Sample data for calculating WQI scores
+Sample data for calculating SQI scores
 }
 \examples{
 data(sampdat)

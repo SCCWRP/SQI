@@ -1,13 +1,13 @@
 
 #### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org*
 
-[![Travis-CI Build Status](https://travis-ci.org/SCCWRP/WQI.svg?branch=master)](https://travis-ci.org/SCCWRP/WQI)
- [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/WQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/WQI)
+[![Travis-CI Build Status](https://travis-ci.org/SCCWRP/SQI.svg?branch=master)](https://travis-ci.org/SCCWRP/SQI)
+ [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/SQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/SQI)
 [![DOI](https://zenodo.org/badge/144910216.svg)](https://zenodo.org/badge/latestdoi/144910216) 
  
 # Overview 
 
-This package provides functions to calculate a water quality index using stream data.  The index requires biological and chemical data.
+This package provides functions to calculate a stream quality index using stream data.  The index requires biological, chemical, and physical data.
 
 # Installing the package
 
@@ -17,18 +17,18 @@ The development version of this package can be installed from Github:
 ```r
 install.packages('devtools')
 library(devtools)
-install_github('SCCWRP/WQI')
-library(WQI)
+install_github('SCCWRP/SQI')
+library(SQI)
 ```
 
 # Usage
 
-The core function is `wqi()`: 
+The core function is `sqi()`: 
 
 
 
 ```r
-wqi(sampdat)
+sqi(sampdat)
 ```
 
 ```
@@ -39,19 +39,19 @@ wqi(sampdat)
 ## 4  SMC05109 2009-06-23 0.8124133   38       98    1.43     0.15       0.00
 ## 5    911LAP 2014-04-09 1.0469197   80       67    1.06     1.10       0.40
 ##   XCMG indexscore_cram Cond   TN2     TP pChem  pHab pChemHab
-## 1  122              93  600 0.175 0.0345 0.707 0.425 0.300475
-## 2   93              84  808 0.705 0.2690 0.001 0.159 0.000159
-## 3  179              57 2437 0.258 0.0520 0.036 0.064 0.002304
-## 4   87              73  196 1.300 0.3740 0.046 0.031 0.001426
-## 5  139              71  871 0.128 0.0280 0.843 0.648 0.546264
+## 1  122              93  600 0.175 0.0345 0.405 0.664 0.800080
+## 2   93              84  808 0.705 0.2690 0.989 0.874 0.998614
+## 3  179              57 2437 0.258 0.0520 0.946 0.965 0.998110
+## 4   87              73  196 1.300 0.3740 0.942 0.988 0.999304
+## 5  139              71  871 0.128 0.0280 0.221 0.392 0.526368
 ##          BiologicalCondition WaterChemistryCondition HabitatCondition
-## 1                    Healthy                     Low           Severe
+## 1                    Healthy                Moderate              Low
 ## 2         Impacted for algae                  Severe           Severe
 ## 3 Impacted for BMI and algae                  Severe           Severe
 ## 4         Impacted for algae                  Severe           Severe
-## 5                    Healthy                     Low           Severe
+## 5                    Healthy                     Low              Low
 ##   OverallStressCondition                 OverallStressCondition_detail
-## 1                 Severe               Stressed by habitat degradation
+## 1                 Severe Stressed by chemistry and habitat degradation
 ## 2                 Severe Stressed by chemistry and habitat degradation
 ## 3                 Severe Stressed by chemistry and habitat degradation
 ## 4                 Severe Stressed by chemistry and habitat degradation

@@ -10,13 +10,13 @@ output:
 
 #### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org*
 
-[![Travis-CI Build Status](https://travis-ci.org/SCCWRP/WQI.svg?branch=master)](https://travis-ci.org/SCCWRP/WQI)
- [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/WQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/WQI)
+[![Travis-CI Build Status](https://travis-ci.org/SCCWRP/SQI.svg?branch=master)](https://travis-ci.org/SCCWRP/SQI)
+ [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/SQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/SQI)
 [![DOI](https://zenodo.org/badge/144910216.svg)](https://zenodo.org/badge/latestdoi/144910216) 
  
 # Overview 
 
-This package provides functions to calculate a water quality index using stream data.  The index requires biological and chemical data.
+This package provides functions to calculate a stream quality index using stream data.  The index requires biological, chemical, and physical data.
 
 # Installing the package
 
@@ -25,18 +25,18 @@ The development version of this package can be installed from Github:
 ```{r eval = F, message = F}
 install.packages('devtools')
 library(devtools)
-install_github('SCCWRP/WQI')
-library(WQI)
+install_github('SCCWRP/SQI')
+library(SQI)
 ```
 
 # Usage
 
-The core function is `wqi()`: 
+The core function is `sqi()`: 
 
 ```{r, message = F, warning = F, echo = F}
 devtools::load_all()
 ```
 ```{r}
-wqi(sampdat)
+sqi(sampdat)
 ```
 

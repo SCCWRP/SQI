@@ -69,6 +69,7 @@ opt_vrs <- list(
 strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', opt_vrs = opt_vrs)
 
 # gam 
-strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', mod_in = 'habgam', opt_vrs = opt_vrs)
+strs_surf(xvar = 'PCT_SAFN', yvar = 'indexscore_cram', mod = 'hab_mod', mod_in = 'habgam', 
+     opt_vrs = opt_vrs)
 
 }
