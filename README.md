@@ -3,6 +3,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/SCCWRP/SQI.svg?branch=master)](https://travis-ci.org/SCCWRP/SQI)
  [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/SQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/SQI)
+[![DOI](https://zenodo.org/badge/154087271.svg)](https://zenodo.org/badge/latestdoi/154087271)
 
 # Overview 
 
