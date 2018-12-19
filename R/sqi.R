@@ -59,9 +59,9 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
   out <- datin %>%
     dplyr::mutate(
       BiologicalCondition = ifelse(CSCI>=0.79 & ASCI>=60,"Healthy",
-                                   ifelse(CSCI<0.79 & ASCI<60,"Impacted for BMI and algae",
-                                          ifelse(CSCI<0.79 & ASCI>=60,"Impacted for BMI",
-                                                 ifelse(CSCI>=0.79 & ASCI<60,"Impacted for algae", "XXXXX"
+                                   ifelse(CSCI<0.79 & ASCI<60,"Impacted for CSCI and ASCI",
+                                          ifelse(CSCI<0.79 & ASCI>=60,"Impacted for CSCI",
+                                                 ifelse(CSCI>=0.79 & ASCI<60,"Impacted for ASCI", "XXXXX"
                                                  )))
       ),
       WaterChemistryCondition = cut(pChem,
