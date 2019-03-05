@@ -40,11 +40,6 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
   # combo stress estimate
   datin$pChemHab<- datin$pChem*datin$pHab
   
-  # converse is estimated to get probability of stress
-  datin$pChem <- 1 - datin$pChem
-  datin$pHab <- 1 - datin$pHab
-  datin$pChemHab <-  1 - datin$pChemHab
-  
   out <- datin %>%
     dplyr::mutate(
       BiologicalCondition = ifelse(CSCI>=0.79 & ASCI>=0.83,"Healthy",
@@ -54,8 +49,8 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
                                                  )))
       ),
       WaterChemistryCondition = cut(pChem,
-                                    breaks = c(-Inf, 0.33, 0.67, Inf),
-                                    labels = c('Low', 'Moderate', 'Severe'),
+                                    breaks = c(-Inf, 0.5, Inf),
+                                    labels = c('Low', 'Severe'),
                                     right = F
       ),
       HabitatCondition = cut(pHab,
@@ -64,8 +59,8 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
                              right = F
       ),
       OverallStressCondition = cut(pChemHab,
-                                   breaks = c(-Inf, 0.33, 0.67, Inf),
-                                   labels = c('Low', 'Moderate', 'Severe'),
+                                   breaks = c(-Inf, 0.375, Inf),
+                                   labels = c('Low', 'Severe'),
                                    right = F
       ),
       OverallStressCondition_detail = ifelse(pChemHab<0.33,"Low stress",
