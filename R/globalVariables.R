@@ -1,5 +1,5 @@
-globalVariables(c('ASCI', 'BiologicalCondition', 'CSCI', 'OverallStressCondition', 'habrf', 'pChem', 
-                  'pChemHab', 'pHab', 'predict', 'wqrf', '.', 'Pr. stress', 'avev', 'data', 'maxv', 
+globalVariables(c('ASCI', 'BiologicalCondition', 'CSCI', 'OverallStressCondition', 'habglm', 'pChem', 
+                  'pChemHab', 'pHab', 'predict', 'wqglm', '.', 'Pr. stress', 'avev', 'data', 'maxv', 
                   'minv', 'modv', 'rng', 'val', 'val.x', 'val.y', 'var'))
 
 #' @importFrom stats predict var

@@ -7,7 +7,7 @@
 #' @param hab_mod_in input model object for prediction stressed state for habitat
 #' 
 #' @details 
-#' See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[randomForest]{randomForest}} objects (\code{\link{wqrf}} and \code{\link{habrf}}, default) or \code{\link[mgcv]{gam}} objects (\code{\link{wqgam}} and \code{\link{habgam}}) included with the package. 
+#' See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[stats]{glm}} objects (\code{\link{wqglm}} and \code{\link{habglm}}) included with the package. 
 #' 
 #' @export
 #'
@@ -19,34 +19,23 @@
 #' 
 #' @examples
 #' 
-#' # using random forest models (default)
 #' sqi(sampdat)
 #' 
-#' # using GAMs
-#' sqi(sampdat, wq_mod_in = wqgam, hab_mod_in = habgam)
 sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
 
   # rf models as default
   if(is.null(wq_mod_in))
-    wq_mod_in <- wqrf
+    wq_mod_in <- wqglm
   if(is.null(hab_mod_in))
-    hab_mod_in <- habrf
+    hab_mod_in <- habglm
   
   ##
   # probability of stress, chem, hab, and overall
   # model predicts probably of low stress
   
-  # gam predictions
-  if(inherits(wq_mod_in, 'gam'))
-    datin$pChem <- predict(wq_mod_in, newdata = datin, type = "response")
-  if(inherits(hab_mod_in, 'gam'))
-    datin$pHab <- predict(hab_mod_in, newdata = datin, type = "response")
-  
-  # randomforest predictions
-  if(inherits(wq_mod_in, 'randomForest'))
-    datin$pChem <- predict(wq_mod_in, newdata = datin, type = "prob")[,2]
-  if(inherits(hab_mod_in, 'randomForest'))
-    datin$pHab <- predict(hab_mod_in, newdata = datin, type = "prob")[,2]
+  # glm predictions
+  datin$pChem <- predict(wq_mod_in, newdata = datin, type = "response")
+  datin$pHab <- predict(hab_mod_in, newdata = datin, type = "response")
   
   # combo stress estimate
   datin$pChemHab<- datin$pChem*datin$pHab
@@ -58,10 +47,10 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
   
   out <- datin %>%
     dplyr::mutate(
-      BiologicalCondition = ifelse(CSCI>=0.79 & ASCI>=60,"Healthy",
-                                   ifelse(CSCI<0.79 & ASCI<60,"Impacted for CSCI and ASCI",
-                                          ifelse(CSCI<0.79 & ASCI>=60,"Impacted for CSCI",
-                                                 ifelse(CSCI>=0.79 & ASCI<60,"Impacted for ASCI", "XXXXX"
+      BiologicalCondition = ifelse(CSCI>=0.79 & ASCI>=0.83,"Healthy",
+                                   ifelse(CSCI<0.79 & ASCI<0.83,"Impacted for CSCI and ASCI",
+                                          ifelse(CSCI<0.79 & ASCI>=0.83,"Impacted for CSCI",
+                                                 ifelse(CSCI>=0.79 & ASCI<0.83,"Impacted for ASCI", "XXXXX"
                                                  )))
       ),
       WaterChemistryCondition = cut(pChem,
