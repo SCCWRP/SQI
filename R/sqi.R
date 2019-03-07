@@ -38,7 +38,7 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
   datin$pHab <- predict(hab_mod_in, newdata = datin, type = "response")
   
   # combo stress estimate
-  datin$pChemHab<- datin$pChem*datin$pHab
+  datin$pChemHab<- 1 - ((1 - datin$pChem) * (1 - datin$pHab))
   
   out <- datin %>%
     dplyr::mutate(
@@ -49,25 +49,25 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
                                                  )))
       ),
       WaterChemistryCondition = cut(pChem,
-                                    breaks = c(-Inf, 0.67, Inf),
+                                    breaks = c(-Inf, 0.87, Inf),
                                     labels = c('Low', 'Severe'),
                                     right = F
       ),
       HabitatCondition = cut(pHab,
-                             breaks = c(-Inf, 0.67, Inf),
+                             breaks = c(-Inf, 0.72, Inf),
                              labels = c('Low', 'Severe'),
                              right = F
       ),
       OverallStressCondition = cut(pChemHab,
-                                   breaks = c(-Inf, 0.33, 0.67, Inf),
+                                   breaks = c(-Inf, 0.87, 0.997, Inf),
                                    labels = c('Low', 'Moderate', 'Severe'),
                                    right = F
       ),
-      OverallStressCondition_detail = ifelse(pChemHab<0.33,"Low stress",
-                                             ifelse(pChem>=0.67 & pHab>=0.67, "Stressed by chemistry and habitat degradation",
-                                                    ifelse(pChem>=0.67 & pHab<0.67, "Stressed by chemistry degradation",
-                                                           ifelse(pChem<0.67 & pHab>0.67, "Stressed by habitat degradation",
-                                                                  ifelse(pChem<0.67 & pHab<0.67, "Stressed by low levels of chemistry or habitat degradation",
+      OverallStressCondition_detail = ifelse(pChemHab<0.98,"Low stress",
+                                             ifelse(pChem>=0.87 & pHab>=0.72, "Stressed by chemistry and habitat degradation",
+                                                    ifelse(pChem>=0.87 & pHab<0.72, "Stressed by chemistry degradation",
+                                                           ifelse(pChem<0.87 & pHab>0.72, "Stressed by habitat degradation",
+                                                                  ifelse(pChem<0.87 & pHab<0.72, "Stressed by low levels of chemistry or habitat degradation",
                                                                          "XXXXX"))))
       ),
       StreamHealthIndex = ifelse(BiologicalCondition=="Healthy" & OverallStressCondition=="Low","Healthy and unstressed",
