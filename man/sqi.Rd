@@ -4,7 +4,8 @@
 \alias{sqi}
 \title{SQI}
 \usage{
-sqi(datin, wq_mod_in = NULL, hab_mod_in = NULL)
+sqi(datin, wq_mod_in = NULL, hab_mod_in = NULL, lothrsh = 0.1,
+  hithrsh = 0.9)
 }
 \arguments{
 \item{datin}{input \code{data.frame} with chemical, physical, and biological data}
@@ -12,6 +13,10 @@ sqi(datin, wq_mod_in = NULL, hab_mod_in = NULL)
 \item{wq_mod_in}{input model object for predicting stressed state for water quality}
 
 \item{hab_mod_in}{input model object for prediction stressed state for habitat}
+
+\item{lothrsh}{numeric indicating lower threshold for low stress}
+
+\item{hithrsh}{numeric indicating upper threshold for high stress}
 }
 \value{
 a \code{data.frame} same as \code{datin} but with new columns for \code{pChem}, \code{pHab}, \code{pChemHab}, \code{BiologicalCondtion}, \code{WaterChemistryCondition}, \code{HabitatCondition}, \code{OverallStressCondition}, and \code{StreamHealthIndex}

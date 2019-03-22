@@ -1,5 +1,5 @@
 
-#### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org*
+#### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org, Susanna Theroux, susannat@sccwrp.org, Kenneth C. Schiff, kens@sccwrp.org*
 
 [![Travis-CI Build Status](https://travis-ci.org/SCCWRP/SQI.svg?branch=master)](https://travis-ci.org/SCCWRP/SQI)
  [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/SCCWRP/SQI?branch=master&svg=true)](https://ci.appveyor.com/project/SCCWRP/SQI)

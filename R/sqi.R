@@ -5,6 +5,8 @@
 #' @param datin input \code{data.frame} with chemical, physical, and biological data
 #' @param wq_mod_in input model object for predicting stressed state for water quality
 #' @param hab_mod_in input model object for prediction stressed state for habitat
+#' @param hithrsh numeric indicating upper threshold for high stress
+#' @param lothrsh numeric indicating lower threshold for low stress
 #' 
 #' @details 
 #' See \code{\link{sampdat}} for required input format.  \code{wq_mod_in} and \code{hab_mod_in} are both \code{\link[stats]{glm}} objects (\code{\link{wqglm}} and \code{\link{habglm}}) included with the package. 
@@ -21,7 +23,7 @@
 #' 
 #' sqi(sampdat)
 #' 
-sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
+sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL, lothrsh = 0.1, hithrsh = 0.9){
 
   # rf models as default
   if(is.null(wq_mod_in))
@@ -49,31 +51,31 @@ sqi <- function(datin, wq_mod_in = NULL, hab_mod_in = NULL){
                                                  )))
       ),
       WaterChemistryCondition = cut(pChem,
-                                    breaks = c(-Inf, 0.87, Inf),
-                                    labels = c('Low', 'Severe'),
+                                    breaks = c(-Inf, lothrsh, hithrsh, Inf),
+                                    labels = c('Low', 'Moderate', 'Severe'),
                                     right = F
       ),
       HabitatCondition = cut(pHab,
-                             breaks = c(-Inf, 0.72, Inf),
-                             labels = c('Low', 'Severe'),
+                             breaks = c(-Inf, lothrsh, hithrsh, Inf),
+                             labels = c('Low', 'Moderate', 'Severe'),
                              right = F
       ),
       OverallStressCondition = cut(pChemHab,
-                                   breaks = c(-Inf, 0.87, 0.997, Inf),
+                                   breaks = c(-Inf, lothrsh, hithrsh, Inf),
                                    labels = c('Low', 'Moderate', 'Severe'),
                                    right = F
       ),
-      OverallStressCondition_detail = ifelse(pChemHab<0.98,"Low stress",
-                                             ifelse(pChem>=0.87 & pHab>=0.72, "Stressed by chemistry and habitat degradation",
-                                                    ifelse(pChem>=0.87 & pHab<0.72, "Stressed by chemistry degradation",
-                                                           ifelse(pChem<0.87 & pHab>0.72, "Stressed by habitat degradation",
-                                                                  ifelse(pChem<0.87 & pHab<0.72, "Stressed by low levels of chemistry or habitat degradation",
+      OverallStressCondition_detail = ifelse(pChemHab<hithrsh,"Low stress",
+                                             ifelse(pChem>=hithrsh & pHab>=hithrsh, "Stressed by chemistry and habitat degradation",
+                                                    ifelse(pChem>=hithrsh & pHab<hithrsh, "Stressed by chemistry degradation",
+                                                           ifelse(pChem<hithrsh & pHab>hithrsh, "Stressed by habitat degradation",
+                                                                  ifelse(pChem<hithrsh & pHab<hithrsh, "Stressed by low levels of chemistry or habitat degradation",
                                                                          "XXXXX"))))
       ),
-      StreamHealthIndex = ifelse(BiologicalCondition=="Healthy" & OverallStressCondition=="Low","Healthy and unstressed",
-                                 ifelse(BiologicalCondition=="Healthy" & OverallStressCondition!="Low","Healthy and resilient",
-                                        ifelse(BiologicalCondition!="Healthy" & OverallStressCondition=="Low","Impacted by unknown stress",
-                                               ifelse(BiologicalCondition!="Healthy" & OverallStressCondition!="Low","Impacted and stressed",
+      StreamHealthIndex = ifelse(BiologicalCondition=="Healthy" & OverallStressCondition!="Severe","Healthy and unstressed",
+                                 ifelse(BiologicalCondition=="Healthy" & OverallStressCondition=="Severe","Healthy and resilient",
+                                        ifelse(BiologicalCondition!="Healthy" & OverallStressCondition!="Severe","Impacted by unknown stress",
+                                               ifelse(BiologicalCondition!="Healthy" & OverallStressCondition=="Severe","Impacted and stressed",
                                                       "XXXXX")))
       )
     ) %>% 
