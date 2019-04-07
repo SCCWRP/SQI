@@ -37,6 +37,7 @@ The core function is `sqi()`:
 devtools::load_all()
 ```
 ```{r}
+head(sampdat)
 sqi(sampdat)
 ```
 

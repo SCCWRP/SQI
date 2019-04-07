@@ -11,7 +11,7 @@ strs_surf(xvar, yvar, mod = c("hab_mod", "wq_mod"), mod_in = NULL,
 \arguments{
 \item{xvar}{chr string of variable for x-axis}
 
-\item{yvar}{chr string of variable for y-axix}
+\item{yvar}{chr string of variable for y-axis}
 
 \item{mod}{chr string of habitat or water quality model to use, must be either \code{'hab_mod'} or \code{'wq_mod'}}
 
@@ -53,11 +53,13 @@ strs_surf(xvar = 'TN', yvar = 'TP', mod = 'wq_mod', mod_in = 'wqglm', opt_vrs = 
 
 # habitat stress
 opt_vrs <- list(
-   indexscore_cram = 100,
-   IPI = 1
- )
+  blc = 100,
+  bs = 100, 
+  hy = 100, 
+  H_SubNat = 1
+)
 
-strs_surf(xvar = 'IPI', yvar = 'indexscore_cram', mod = 'hab_mod', mod_in = 'habglm', 
-     opt_vrs = opt_vrs)
+# hab
+strs_surf(xvar = 'blc', yvar = 'H_SubNat', mod  = 'hab_mod', mod_in = 'habglm', opt_vrs = opt_vrs)
 
 }

@@ -28,11 +28,30 @@ The core function is `sqi()`:
 
 
 ```r
+head(sampdat)
+```
+
+```
+## # A tibble: 6 x 19
+##   MasterID    yr  CSCI  ASCI   IPI PCT_SAFN H_AqHab H_SubNat Ev_FlowHab
+##   <chr>    <dbl> <dbl> <dbl> <dbl>    <dbl>   <dbl>    <dbl>      <dbl>
+## 1 402M000~  2015 0.729 0.969  1.07     0.81    1        0.96       0.77
+## 2 402M000~  2015 0.945 1.14   1        0.77    0.73     0.97       0.78
+## 3 402M000~  2015 0.283 1.17   0.95     0.77    0.78     1          0.15
+## 4 402M000~  2016 0.703 0.932  0.98     0.95    0.85     1          0.18
+## 5 402M000~  2016 0.315 0.886  0.93     0.96    0.96     0.93       0.3 
+## 6 402S095~  2012 0.948 1.04   1        0.82    0.82     0.93       0.77
+## # ... with 10 more variables: XCMG <dbl>, blc <dbl>, bs <dbl>, hy <dbl>,
+## #   ps <dbl>, indexscore_cram <dbl>, Cond <dbl>, TN <dbl>, TP <dbl>,
+## #   SiteSet <chr>
+```
+
+```r
 sqi(sampdat)
 ```
 
 ```
-## # A tibble: 266 x 24
+## # A tibble: 266 x 28
 ##    MasterID    yr  CSCI  ASCI   IPI PCT_SAFN H_AqHab H_SubNat Ev_FlowHab
 ##    <chr>    <dbl> <dbl> <dbl> <dbl>    <dbl>   <dbl>    <dbl>      <dbl>
 ##  1 402M000~  2015 0.729 0.969  1.07     0.81    1       0.96        0.77
@@ -45,9 +64,10 @@ sqi(sampdat)
 ##  8 403M015~  2016 0.431 0.463  0.41     0.04    0.52    0.290       1   
 ##  9 403M015~  2015 0.664 0.974  0.96     0.64    0.92    0.85        0.85
 ## 10 403M015~  2015 0.761 1.10   0.97     0.77    0.93    0.8         1   
-## # ... with 256 more rows, and 15 more variables: XCMG <dbl>,
-## #   indexscore_cram <dbl>, Cond <dbl>, TN <dbl>, TP <dbl>, SiteSet <chr>,
-## #   pChem <dbl>, pHab <dbl>, pChemHab <dbl>, BiologicalCondition <chr>,
+## # ... with 256 more rows, and 19 more variables: XCMG <dbl>, blc <dbl>,
+## #   bs <dbl>, hy <dbl>, ps <dbl>, indexscore_cram <dbl>, Cond <dbl>,
+## #   TN <dbl>, TP <dbl>, SiteSet <chr>, pChem <dbl>, pHab <dbl>,
+## #   pChemHab <dbl>, BiologicalCondition <chr>,
 ## #   WaterChemistryCondition <chr>, HabitatCondition <chr>,
 ## #   OverallStressCondition <chr>, OverallStressCondition_detail <chr>,
 ## #   StreamHealthIndex <chr>
