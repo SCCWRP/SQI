@@ -54,12 +54,11 @@ strs_surf(xvar = 'TN', yvar = 'TP', mod = 'wq_mod', mod_in = 'wqglm', opt_vrs = 
 # habitat stress
 opt_vrs <- list(
   blc = 100,
-  bs = 100, 
-  hy = 100, 
-  H_SubNat = 1
+  ps = 100, 
+  PCT_SAFN = 1
 )
 
 # hab
-strs_surf(xvar = 'blc', yvar = 'H_SubNat', mod  = 'hab_mod', mod_in = 'habglm', opt_vrs = opt_vrs)
+strs_surf(xvar = 'blc', yvar = 'PCT_SAFN', mod  = 'hab_mod', mod_in = 'habglm', opt_vrs = opt_vrs)
 
 }
