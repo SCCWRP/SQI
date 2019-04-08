@@ -1,8 +1,8 @@
 Package: SQI
 Type: Package
 Title: Calculate Stream Quality Index Scores From Stream Data
-Version: 1.4.0
-Date: 2019-04-07
+Version: 1.5.0
+Date: 2019-04-08
 Author: Marcus W. Beck [aut, cre],
   Raphael D. Mazor [ctb]
 Maintainer: Marcus W. Beck <marcusb@sccwrp.org>
