@@ -32,4 +32,4 @@ Authors@R: c(
     email = "raphaelm@sccwrp.org")
     )
 Encoding: UTF-8
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

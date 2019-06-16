@@ -42,13 +42,13 @@
 #' 
 #' # habitat stress
 #' opt_vrs <- list(
-#'   blc = 100,
-#'   ps = 100, 
-#'   PCT_SAFN = 1
+#'   hy = 100,
+#'   PCT_SAFN = 1, 
+#'   XCMG = 1
 #' )
 #' 
 #' # hab
-#' strs_surf(xvar = 'blc', yvar = 'PCT_SAFN', mod  = 'hab_mod', mod_in = 'habglm', opt_vrs = opt_vrs)
+#' strs_surf(xvar = 'hy', yvar = 'PCT_SAFN', mod  = 'hab_mod', mod_in = 'habglm', opt_vrs = opt_vrs)
 #' 
 strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), mod_in = NULL, title = TRUE, lenv = 200, opt_vrs = NULL, low = "#2c7bb6", mid = "#ffffbf", high = "#d7191c"){
   
@@ -56,16 +56,16 @@ strs_surf <- function(xvar, yvar, mod = c('hab_mod', 'wq_mod'), mod_in = NULL, t
   mod <- match.arg(mod)
   
   # hab and wq vars
-  hab_vrs <- c('blc', 'ps', 'PCT_SAFN')
+  hab_vrs <- c('hy', 'PCT_SAFN', 'XCMG')
   wq_vrs <- c('TN', 'TP', 'Cond')
   
   # rng and avgs for habitat/wq variables
   # averages from calibration data, all stations/dates
   rng_vrs <- tibble::tibble( 
     var = c(hab_vrs, wq_vrs),
-    minv = c(25, 25, 0, 0, 0, 0),
-    avev = c(76.1, 55.2, 0.616, 1.92, 0.232, 1615),
-    maxv = c(100, 100, 1, 1.5, 0.3, 2000),
+    minv = c(25, 0, 0, 0, 0, 0),
+    avev = c(76.1, 0.62, 0.53, 1.92, 0.232, 1615),
+    maxv = c(100, 1, 1, 1.5, 0.3, 2000),
     modv = c('hab_mod', 'hab_mod', 'hab_mod', 'wq_mod', 'wq_mod', 'wq_mod')
   ) %>% 
     gather('rng', 'val', minv, avev, maxv)

@@ -1,11 +1,5 @@
 ---
-output:
-  html_document:
-    keep_md: yes
-    toc: no
-    self_contained: no
-  pdf_document:
-    toc: yes
+output: github_document
 ---
 
 #### *Marcus W. Beck, marcusb@sccwrp.org, Raphael D. Mazor, raphaelm@sccwrp.org, Susanna Theroux, susannat@sccwrp.org, Kenneth C. Schiff, kens@sccwrp.org*
